@@ -72,47 +72,7 @@
           "npmPublish": false
         }
       ],
-      "@semantic-release/git",
-      [
-        "semantic-release-chrome",
-        {
-          "distFolder": "dist/chrome",
-          "asset": "spdx-license-diff.chrome.zip",
-          "extensionId": "kfoadicmilbgnicoldjmccpaicejacdh"
-        }
-      ],
-      [
-        "semantic-release-firefox-add-on",
-        {
-          "extensionId": "{95b7d495-ee73-4a03-b918-670a9d77c871}",
-          "targetXpi": "spdx-license-diff.firefox.xpi.zip",
-          "sourceDir": "dist/firefox",
-          "manifestPath": "manifest.json"
-        }
-      ],
-      [
-        "@semantic-release/github",
-        {
-          "assets": [
-            {
-              "path": "spdx-license-diff.chrome.zip",
-              "label": "Chrome"
-            },
-            {
-              "path": "spdx-license-diff.firefox.xpi.zip",
-              "label": "Firefox"
-            },
-            {
-              "path": "packages/*.edge.zip",
-              "label": "Edge"
-            },
-            {
-              "path": "packages/*.opera.crx.zip",
-              "label": "Opera"
-            }
-          ]
-        }
-      ]
+      "@semantic-release/git"
     ]
   }
 }
