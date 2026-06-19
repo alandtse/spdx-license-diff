@@ -1699,25 +1699,17 @@ function updateProgressBar(max, value, visible = true) {
         // Use EMA rate only if it is a valid finite number and > 0.01; fallback to overallRate
         const rate = (progressRateEma && isFinite(progressRateEma) && progressRateEma > 0.01) ? progressRateEma : (isFinite(overallRate) ? overallRate : 0);
         
+        const elapsedText = totalElapsed.toFixed(1) + "s";
+        let etaText = "Calculating...";
         if (rate > 0) {
-          const etaSeconds = Math.ceil(remaining / rate);
-          let etaText = "";
-          // Ensure we don't display "0s remaining" due to extremely fast runs
-          if (etaSeconds <= 1) {
-            etaText = "almost done";
-          } else if (etaSeconds < 60) {
-            etaText = etaSeconds + "s remaining";
-          } else {
-            const mins = Math.floor(etaSeconds / 60);
-            const secs = etaSeconds % 60;
-            etaText = mins + "m " + secs + "s remaining";
+          const etaSeconds = remaining / rate;
+          if (isFinite(etaSeconds)) {
+            etaText = etaSeconds.toFixed(1) + "s";
           }
-          progressTextNode.textContent = "Comparing: " + currentVal + "/" + maxVal + " (" + etaText + ")";
-          progressTextNode.style.display = "flex";
-        } else {
-          progressTextNode.textContent = "Comparing: " + currentVal + "/" + maxVal;
-          progressTextNode.style.display = "flex";
         }
+        
+        progressTextNode.textContent = "Comparing: " + currentVal + "/" + maxVal + " (Elapsed: " + elapsedText + " | ETA: " + etaText + ")";
+        progressTextNode.style.display = "flex";
       } else if (!visible || currentVal >= maxVal) {
         progressTextNode.style.display = "none";
       }
